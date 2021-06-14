@@ -1,0 +1,78 @@
+body {
+	background: linear-gradient(45deg,#1b1b60,#4c98e1);
+	margin: 0;
+}
+
+#root {
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+#random, #magglass {
+	cursor: pointer;
+}
+
+#qm1, #qm2, #qm3, #qm4, #qm5 {
+	transform-origin: center;
+	transform-box: fill-box;
+}
+
+#qm4, #qm5 {
+	opacity: 0;
+}
+
+#random:hover #qm1{
+	animation: crazy1 1s infinite;
+}
+
+#random:hover #qm2{
+	animation: crazy1 1.5s infinite .1s;
+}
+
+#random:hover #qm3{
+	animation: crazy1 1s infinite .2s;
+}
+
+#random:hover #qm4 {
+	animation: crazy2 3s infinite;
+}
+
+#random:hover #qm5 {
+	animation: crazy2 2s infinite .2s;
+}
+
+@keyframes crazy1 {
+	0% {
+		opacity: 1;
+		transform: scale(1);
+	}
+	100% {
+		opacity: 0;
+		transform: scale(1.15);
+	}
+}
+
+@keyframes crazy2 {
+	0% {
+		opacity: 0;
+		transform: scale(1);
+	}
+	100% {
+		opacity: 1;
+		transform: scale(1.1);
+	}
+}
+
+#magglass:hover {
+	transform-origin: 46% 45%;
+	transform-box: fill-box;
+	animation: rotate 1s infinite alternate;
+}
+
+@keyframes rotate {
+	from { transform: rotate(0deg); }
+	to { transform: rotate(-20deg); }
+}
