@@ -2,7 +2,7 @@ body {
 	background: linear-gradient(45deg,#1b1b60,#4c98e1);
 	margin: 0;
 	height: 100%;
-	animation: backgroundmove 6s infinite;
+	animation: backgroundmove 26s ease-in-out infinite;
 	background-size: 400% 400%;
 	font-family: Arial, Helvetica, sans-serif;
 	color: #eee;
@@ -17,7 +17,6 @@ body {
 #root {
 	height: 100vh;
 	display: flex;
-	/* flex-direction: column; */
 	flex-wrap: wrap;
 	justify-content: center;
 	align-items: flex-end;
@@ -141,13 +140,13 @@ form {
 	margin-top: 1rem;
 	width: 100vw;
 	height: 3.5rem;
+	color: #909090;
 	background: #29293d;
 }
 
 #footer > p {
 	font-weight: 400;
 	font-style: italic;
-	color: #909090;
 	margin-right: 1rem;
 }
 
@@ -157,6 +156,7 @@ form {
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	color: inherit;
 }
 
 @media (max-width: 1024px) {
