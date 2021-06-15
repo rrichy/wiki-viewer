@@ -28,14 +28,12 @@ class App extends Component {
 
 	updateResults(e) {
 		e.preventDefault();
-		document.querySelector('.search-txt').style.width = '300px';
-		
 		$.ajax({
-			url: `https://en.wikipedia.org/w/api.php?action=query&format=json&prop=pageimages%7Cextracts&generator=search&pilimit=100&exsentences=3&exintro=1&explaintext=1&gsrsearch=${encodeURI(this.state.search)}&gsrnamespace=0&gsrlimit=10`,
+			url: `https://en.wikipedia.org/w/api.php?action=query&format=json&prop=pageimages%7Cextracts&generator=search&pilimit=100&exsentences=2&exintro=1&explaintext=1&gsrsearch=${encodeURI(this.state.search)}&gsrnamespace=0&gsrlimit=10`,
 			dataType: 'jsonp',
 			success: data => {
 				let { pages } = data.query,
-					result = [];
+				result = [];
 
 				for(let page in pages) {
 					let { title, extract, pageid } = pages[page];
@@ -52,17 +50,19 @@ class App extends Component {
 		await this.setState({ search: value});
 	}
 
-	showBar(e) {
-		const bar = document.querySelector('.search-txt');
-		if(bar.style.width != '300px') {
-			bar.style.width = '300px';
-			bar.focus();
-			let checkActive = setInterval(() => {
-				if(document.activeElement != bar && !this.state.search) {
-					bar.style.width = '0px';
-					clearInterval(checkActive);
-				}
-			}, 100);
+	showBar() {
+		if(window.innerWidth > 1024) {
+			const bar = document.querySelector('.search-txt');
+			if(bar.style.width != '300px') {
+				bar.style.width = '300px';
+				bar.focus();
+				let checkActive = setInterval(() => {
+					if(document.activeElement != bar && !this.state.search) {
+						bar.style.width = '0px';
+						clearInterval(checkActive);
+					}
+				}, 210);
+			}
 		}
 	}
 	
@@ -85,7 +85,7 @@ class App extends Component {
 
 					<form onSubmit={this.updateResults} onMouseOver={this.showBar}>
 						<input className='search-txt' type="text" placeholder="Type here to search" value={this.state.search} onChange={this.updateSearch}/>
-						<svg className='search-btn' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 31.78 30.3" >
+						<svg className='search-btn' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 31.78 30.3" onClick={this.updateResults}>
 							<circle id="frame" cx="13.81" cy="13.81" r="12.31" style={{fill:"none", stroke:"#fff200", strokeMiterlimit:10, strokeWidth:"3px"}}/>
 							<line id="handle" x1="13.81" y1="13.81" x2="30.7" y2="29.26" style={{stroke:"#fff200", strokeMiterlimit:10, strokeWidth:"3px", strokeDasharray: [12,12], strokeDashoffset: 12}}/>
 							<g id="glass"><circle cx="13.81" cy="13.81" r="9.16" style={{fill:"none", stroke:"#fff200", strokeMiterlimit:10, strokeDasharray:[11.511748313903809,17.267621994018555]}}/></g>

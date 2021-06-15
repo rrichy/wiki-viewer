@@ -107,10 +107,6 @@ form {
 	margin-bottom: 1rem;
 }
 
-/* form:hover .search-txt{
-	width: 300px;
-} */
-
 .search-txt {
 	width: 0px;
 	font-size: 1.2rem;
@@ -158,4 +154,10 @@ form {
 	font-style: italic;
 	color: #909090;
 	margin-right: 1rem;
+}
+
+@media (max-width: 1024px) {
+	.search-txt {
+		width: 300px;
+	}
 }
