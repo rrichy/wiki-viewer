@@ -23,7 +23,7 @@ class App extends Component {
 
 		this.updateResults = this.updateResults.bind(this);
 		this.updateSearch = this.updateSearch.bind(this);
-		this.randomPage = this.randomPage.bind(this);
+		this.showBar = this.showBar.bind(this);
 	}
 
 	updateResults(e) {
@@ -42,26 +42,37 @@ class App extends Component {
 					result.push([title, extract, pageid]);
 				}
 				document.querySelector('#root').style.height = 'fit-content';
-				// document.querySelector('#footer').style.height = '5%';
 				this.setState({ results: result });
 			}
 		});
 	}
 
-	updateSearch(e) {
+	async updateSearch(e) {
 		const value = e.target.value;
-		this.setState({ search: value});
+		await this.setState({ search: value});
 	}
 
-	randomPage() {
-		window.open('https://en.wikipedia.org/wiki/Special:Random');
-		return false;
+	showBar(e) {
+		const bar = document.querySelector('.search-txt');
+		if(bar.style.width != '300px') {
+			bar.style.width = '300px';
+			bar.focus();
+			let checkActive = setInterval(() => {
+				if(document.activeElement != bar && !this.state.search) {
+					bar.style.width = '0px';
+					clearInterval(checkActive);
+				}
+			}, 100);
+		}
 	}
 	
 	render() { 
 		return (
 			<React.Fragment>
 				<div id="wrapper">
+					 <h1>A Wikipedia Viewer</h1>
+					 <p>Click the icon below to open a random article.</p>
+					 <p>Or use the search bar.</p>
 					<a id="random" href="https://en.wikipedia.org/wiki/Special:Random" target="_blank">
 						<svg xmlns="http://www.w4.org/2000/svg" viewBox="-5 0 106.32 91.08" width="100px" height="100px">
 							<g id="qm1" style={{isolation: "isolate"}}><path d="M30.72,34a17.68,17.68,0,0,1,3-9.4,23,23,0,0,1,8.69-7.89,27.38,27.38,0,0,1,13.33-3.12,28.47,28.47,0,0,1,12.5,2.61,20.26,20.26,0,0,1,8.38,7.1,17.43,17.43,0,0,1,3,9.77,15.1,15.1,0,0,1-1.68,7.27,22.2,22.2,0,0,1-4,5.4Q71.55,48,65.54,53.33A33.06,33.06,0,0,0,62.88,56a10.76,10.76,0,0,0-1.49,2.1A10.13,10.13,0,0,0,60.63,60c-.18.63-.45,1.75-.81,3.34q-.91,5.09-5.81,5.08a5.93,5.93,0,0,1-4.27-1.66A6.54,6.54,0,0,1,48,61.83a18.14,18.14,0,0,1,1.27-7.11,17.86,17.86,0,0,1,3.37-5.27c1.4-1.51,3.28-3.31,5.66-5.4q3.12-2.73,4.52-4.12a14.11,14.11,0,0,0,2.34-3.1,7.45,7.45,0,0,0,1-3.71,8.67,8.67,0,0,0-2.9-6.6,10.62,10.62,0,0,0-7.5-2.68q-5.37,0-7.91,2.71a21.67,21.67,0,0,0-4.29,8q-1.67,5.52-6.3,5.52a6.19,6.19,0,0,1-4.62-1.93A5.9,5.9,0,0,1,30.72,34ZM54.55,87.46a7.65,7.65,0,0,1-5.2-1.93,6.75,6.75,0,0,1-2.22-5.39A6.94,6.94,0,0,1,49.28,75a7.25,7.25,0,0,1,5.27-2.1,7.17,7.17,0,0,1,7.28,7.28,6.83,6.83,0,0,1-2.2,5.37A7.44,7.44,0,0,1,54.55,87.46Z" transform="translate(-5.39 -4.5)" style={{fill: "none", stroke: "#fff", strokeMiterlimit: 10}}/></g>
@@ -72,7 +83,7 @@ class App extends Component {
 						</svg>
 					</a>
 
-					<form onSubmit={this.updateResults} onClick={this.showSearch}>
+					<form onSubmit={this.updateResults} onMouseOver={this.showBar}>
 						<input className='search-txt' type="text" placeholder="Type here to search" value={this.state.search} onChange={this.updateSearch}/>
 						<svg className='search-btn' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 31.78 30.3" >
 							<circle id="frame" cx="13.81" cy="13.81" r="12.31" style={{fill:"none", stroke:"#fff200", strokeMiterlimit:10, strokeWidth:"3px"}}/>
