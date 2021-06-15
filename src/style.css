@@ -1,14 +1,11 @@
-* {
-	font-family: Arial, Helvetica, sans-serif;
-	color: #eee;
-}
-
 body {
 	background: linear-gradient(45deg,#1b1b60,#4c98e1);
 	margin: 0;
 	height: 100%;
 	animation: backgroundmove 6s infinite;
 	background-size: 400% 400%;
+	font-family: Arial, Helvetica, sans-serif;
+	color: #eee;
 }
 
 @keyframes backgroundmove {
@@ -32,10 +29,6 @@ body {
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-}
-
-a {
-	margin-bottom: 1rem;
 }
 
 #wrapper > p {
@@ -120,8 +113,10 @@ form {
 
 .search-btn {
 	height: 30px;
+	width: 30px !important;
 	float: right;
 	cursor: pointer;
+	color: #fff200;
 }
 
 .result {
@@ -154,6 +149,14 @@ form {
 	font-style: italic;
 	color: #909090;
 	margin-right: 1rem;
+}
+
+#footer > a {
+	height: fit-content;
+	margin-right: .5rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 @media (max-width: 1024px) {
