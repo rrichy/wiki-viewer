@@ -108,6 +108,7 @@ form {
 	outline: none;
 	background: transparent;
 	transition: 0.2s;
+	color: inherit;
 }
 
 .search-btn {
@@ -126,6 +127,7 @@ form {
 	text-decoration: none;
 	padding: 10px;
 	border-radius: .75rem;
+	color: inherit;
 }
 
 .result:hover {
